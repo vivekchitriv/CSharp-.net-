@@ -11,13 +11,17 @@ namespace CalculationApp
     {
         static void Main(string[] args)
         {
+
             int i = 0, j = 0;
             string a = null, b = null; ;
             int ch = 0;
             BasicCalculator calculator = null;
+            //className refernce = null;
             TempratureConvertor convertor = null;
-            calculator = new BasicCalculator();
-            convertor =  new TempratureConvertor();
+            
+             convertor = new TempratureConvertor();
+             calculator = new BasicCalculator();
+            
             do
             {
                 Console.WriteLine("Menu Driven Program\n");
@@ -83,6 +87,7 @@ namespace CalculationApp
                         Console.WriteLine("DIVISION :" + res3.ToString());
                         break;
                     case 5:
+                        
                         Console.WriteLine("Enter the value of fahrenheit :");
                         string fahrenheit = Console.ReadLine();
                         decimal far = Convert.ToDecimal(fahrenheit);
@@ -90,6 +95,7 @@ namespace CalculationApp
                         Console.WriteLine("Celcius :" + res4.ToString());
                         break;
                     case 6:
+
                         Console.WriteLine("Enter the value of celsius  :");
                         string celsius = Console.ReadLine();
                         decimal cels = Convert.ToDecimal(celsius);
