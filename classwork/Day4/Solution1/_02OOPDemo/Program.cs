@@ -22,7 +22,7 @@ namespace _02OOPDemo
              report.Execute();*/
             //call factory method
             ReportFactory rf = new ReportFactory();
-            Console.WriteLine("1: PDF , 2 : DOCX , 3 : PPT");
+            Console.WriteLine("1: PDF , 2 : DOCX , 3 : PPT ,4: EXCEL 5 : TEXT");
             int choice = int.Parse(Console.ReadLine());
             //call factory method
             Report report = rf.GetReport(choice);
@@ -45,9 +45,17 @@ namespace _02OOPDemo
                 return new DOCX();
 
             }
-            else
+            else if(choice == 3)
             {
                 return new PPT();
+            }
+            else if(choice == 4)
+            {
+                return new Excel();
+            }
+            else
+            {
+                return new Text();
             }
         }
     }
@@ -57,7 +65,7 @@ namespace _02OOPDemo
             protected abstract void Parse();
             protected abstract void Validate();
             protected abstract void Print();
-        public void Execute ( )
+        public virtual void Execute ( )
         {
             Read();
             Parse();
@@ -65,6 +73,21 @@ namespace _02OOPDemo
             Print();
         }
     }
+
+    public abstract class SpecialReport:Report
+    {
+        protected abstract void ReValidate();
+        public override void Execute()
+        {
+            Read();
+            Parse();
+            Validate();
+            ReValidate();
+            Print();
+        }
+    }
+
+    //Architect
     public class PDF:Report
     {
         protected override void Read()
@@ -93,8 +116,8 @@ namespace _02OOPDemo
             Console.WriteLine("Pdf Getting Printing Here:");
         }
 
-        
-    }
+
+    } //Written Developer 1
 
     public class DOCX: Report
     {
@@ -124,10 +147,10 @@ namespace _02OOPDemo
             Console.WriteLine("Pdf Getting Printing Here:");
         }
 
-        
-    }
 
-    //Developer 4
+    }   //Written Developer 2
+
+
     public class PPT : Report
     {
         protected override void Parse()
@@ -149,5 +172,62 @@ namespace _02OOPDemo
         {
             Console.WriteLine(" PPT : Validate");
         }
+    } //Written Developer 4
+
+    public class Excel : SpecialReport //Written Developer 5 -Addition of one method
+    {
+        protected override void Parse()
+        {
+            Console.WriteLine("Excel : Parse ");
+        }
+
+        protected override void Print()
+        {
+            Console.WriteLine("Excel : print ");
+        }
+
+        protected override void Read()
+        {
+            Console.WriteLine("Excel : Read ");
+        }
+
+        protected override void Validate()
+        {
+            Console.WriteLine("Excel : Validate ");
+        }
+
+        protected override void ReValidate()
+        {
+            Console.WriteLine("Excel : ReValidate()");
+        }
+          
+    }
+
+    public class Text : SpecialReport//Written Developer 6
+    {
+        protected override void Parse()
+        {
+            Console.WriteLine("Text : Parse");
+        }
+
+        protected override void Print()
+        {
+            Console.WriteLine("Text : Print");
+        }
+
+        protected override void Read()
+        {
+            Console.WriteLine("Text : read");
+        }
+
+        protected override void Validate()
+        {
+            Console.WriteLine("Text : Validate");
+        }
+        protected override void ReValidate()
+        {
+            Console.WriteLine(" TXT : ReValidate");
+        }
+        
     }
 }
