@@ -13,7 +13,9 @@ namespace Product_FIle_IO
         static void Main(string[] args)
         {
             Product product = new Product();
-            product.writeDetails();
+            //product.writeDetails();
+            product.ReadDetails();
+            Console.ReadLine();
         }
     }
 }

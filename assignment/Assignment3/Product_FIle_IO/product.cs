@@ -109,5 +109,30 @@ namespace Product_FIle_IO
             fs.Close();
         }
         #endregion
+
+        #region Read data from Product.txt file
+        public void ReadDetails (  )
+        {
+            // FileStream object created for file read operation FileMode is Open and FileAccess in Read mode
+            FileStream fo = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment3\Product.txt", FileMode.Open, FileAccess.Read);
+            
+            // create object of BinaryFormatter 
+            BinaryFormatter reader = new BinaryFormatter();
+
+            //read data from file and put on product class object
+            Product readDataFromProduct = (Product)reader.Deserialize(fo);
+            Console.WriteLine(readDataFromProduct.title);
+            Console.WriteLine(readDataFromProduct.price);
+            Console.WriteLine(readDataFromProduct.category);
+            Console.WriteLine(readDataFromProduct.manufacturer);
+
+            Console.WriteLine("Product data is Read From file successfully");
+
+            //close open object
+            reader = null;
+            fo.Close();
+        }
+        #endregion
+
     }
 }
