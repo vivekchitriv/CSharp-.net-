@@ -1,0 +1,2 @@
+Logged   9/8/2020 6:26:07 PM  :Date has been write in Product.txt file
+Logged   9/8/2020 6:30:15 PM  :Data has been Read from Product.txt file

@@ -79,8 +79,12 @@ namespace Product_FIle_IO
         {
             //open file in File Mode,Access
             FileStream fs = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment3\Product.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream fl = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment3\Logger.txt", FileMode.Append, FileAccess.Write);
+
             //Create Object of Binary Formatter 
             BinaryFormatter writer = new BinaryFormatter();
+            StreamWriter writer1 = new StreamWriter(fl);
+
             //create Object of Product class
             Product prod = new Product();
 
@@ -100,12 +104,17 @@ namespace Product_FIle_IO
             Console.WriteLine("Enter the Product Code");
             prod.product_code = Console.ReadLine();
 
+            Console.WriteLine("Data is Inserted inside file successfully..");
             //serialize product
             writer.Serialize(fs, prod);
+            string Log = Logger.FileLogger.Log("Date has been write in Product.txt file");
 
+            writer1.WriteLine(Log);
             //close open object
             writer = null;
 
+            writer1.Flush();
+            fl.Flush();
             fs.Close();
         }
         #endregion
@@ -115,7 +124,9 @@ namespace Product_FIle_IO
         {
             // FileStream object created for file read operation FileMode is Open and FileAccess in Read mode
             FileStream fo = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment3\Product.txt", FileMode.Open, FileAccess.Read);
-            
+            FileStream fw = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment3\Logger.txt", FileMode.Append, FileAccess.Write);
+
+            StreamWriter writer = new StreamWriter(fw);
             // create object of BinaryFormatter 
             BinaryFormatter reader = new BinaryFormatter();
 
@@ -128,7 +139,15 @@ namespace Product_FIle_IO
 
             Console.WriteLine("Product data is Read From file successfully");
 
+            //log message log
+
+            string Log1 = Logger.FileLogger.Log("Data has been Read from Product.txt file");
+
+            writer.WriteLine(Log1);
             //close open object
+
+            writer.Flush();
+            fw.Flush();
             reader = null;
             fo.Close();
         }
