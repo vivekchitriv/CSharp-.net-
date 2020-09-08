@@ -104,7 +104,7 @@ namespace _06OOPDemo
             msg = courier.deliver(oid);
 
             //Console.WriteLine(items.ToArray() + "Are purchase having prices" + prices.ToArray().ToString() + " with  bill Amt " + billAmt + "..." + msg);
-            return   string.Join(" ,",items)+ "Are purchase having prices" + prices.ToString() + " with  bill Amt " + billAmt + "..." + msg;
+            return   string.Join(" ,",items)+ "Are purchase having prices" + prices.ToArray().ToString() + " with  bill Amt " + billAmt + "..." + msg;
         }
 
 
