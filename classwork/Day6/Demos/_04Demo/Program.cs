@@ -23,7 +23,7 @@ namespace _04Demo
             while (true)
             {
                 
-                Console.WriteLine("You want to Write and read data...1 .Write into file 2. read from file");
+                Console.WriteLine("You want to Write and read data...1 .Write into file 2. read from file 3 . write data into existing object");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch(ch)
                 {
@@ -81,6 +81,7 @@ namespace _04Demo
                         writer.Serialize(fs, arr);
                         writer = null;
                         fs.Close();
+
                         break;
                     #endregion
                     case 2:
@@ -119,9 +120,79 @@ namespace _04Demo
                                 Console.WriteLine("Unknow Data!");
                             }
                         }
+                        fs1.Close();
+                        fs1 = null;
+                        reader = null;
                         Console.ReadLine();
                         #endregion
                         break;
+                    case 3:
+                        ArrayList arr3 = new ArrayList();
+                        FileStream os = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\classwork\Day6\Demos\_04Demo\data.txt",
+                            FileMode.Open, FileAccess.Read);
+
+                        BinaryFormatter reader2 = new BinaryFormatter();
+                        ArrayList list = (ArrayList)reader2.Deserialize(os);
+                        arr3.Add(list);
+                        os.Close();
+                        os = null;
+                        reader2 = null;
+                        while (true)
+                        {
+                            Console.WriteLine("which object data : 1. Employee 2. Book");
+                            int choice = Convert.ToInt32(Console.ReadLine());
+                            switch (choice)
+                            {
+                                case 1:
+                                    Employee emp = new Employee();
+
+                                    Console.WriteLine("Enter Emp No");
+                                    emp.No = Convert.ToInt32(Console.ReadLine());
+
+                                    Console.WriteLine("Enter Emp Name");
+                                    emp.Name = Console.ReadLine();
+
+                                    Console.WriteLine("Enter Emp Address");
+                                    emp.Address = Console.ReadLine();
+
+                                    arr3.Add(emp);
+                                    break;
+                                case 2:
+                                    Book b = new Book();
+
+                                    Console.WriteLine("Enter ISBN ");
+                                    b.ISBN = Convert.ToInt32(Console.ReadLine());
+
+                                    Console.WriteLine("Enter Title ");
+                                    b.title = Console.ReadLine();
+
+                                    arr3.Add(b);
+                                    break;
+                                default:
+                                    Console.WriteLine("Invaid choice  !");
+                                    break;
+
+                            }
+                            Console.WriteLine("Do you want any more object to store into file 1. Yes / 2.No  ");
+                            int continu = Convert.ToInt32(Console.ReadLine());
+                            if (continu == 2)
+                            {
+                                break;
+                            }
+
+                        }
+
+                        
+                        
+                        FileStream fs3 = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\classwork\Day6\Demos\_04Demo\data.txt",
+                        FileMode.Truncate, FileAccess.Write);
+
+                        BinaryFormatter writer2 = new BinaryFormatter();
+                        writer2.Serialize(fs3, arr3);
+                        writer = null;
+                        fs3.Close();
+                        break;
+
                     default:
                         Console.WriteLine("Invalid Choice..");
                         break;
