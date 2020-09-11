@@ -138,13 +138,14 @@ namespace Assignment4
             #region MenuList
 
             int choice;
+            Console.WriteLine(" welcome to HR department Application ");
             Console.WriteLine("0. EXIT");
             Console.WriteLine("1. Calcluate_Total_Salary");
             Console.WriteLine("2. GetAllEmployeesByDept");
             Console.WriteLine("3. DeptwiseStaffCount");
             Console.WriteLine("4. DeptwiseAvgSal");
             Console.WriteLine("5. DeptwiseMinSal");
-            Console.WriteLine("Enter choice : ");
+            Console.WriteLine("Enter your choice : ");
             choice = Convert.ToInt32(Console.ReadLine());
             return choice; 
             #endregion
