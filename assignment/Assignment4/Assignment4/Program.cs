@@ -73,6 +73,10 @@ namespace Assignment4
             return totalSalary;
         }
 
+        public static List<Employee> GetAllEmployeesByDept(int number)
+        {
+                return DeptList[number].employees;
+        }
         public static int menulist()
         {
             int choice;
@@ -100,7 +104,13 @@ namespace Assignment4
                         Console.WriteLine(totalSalary.ToString());
                         break;
                     case 2:
-
+                        Console.WriteLine("Enter the department to which employee details get");
+                        int number = Convert.ToInt32(Console.ReadLine());
+                        List<Employee> Emp = GetAllEmployeesByDept(number);
+                        foreach (Employee emp in Emp)
+                        {
+                            Console.WriteLine(emp.ToString());
+                        }
                         break;
                     case 3:
                         break;
