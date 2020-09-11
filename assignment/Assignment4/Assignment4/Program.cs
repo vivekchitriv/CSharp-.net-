@@ -9,13 +9,14 @@ namespace Assignment4
 {
         class Program
         {
-        static Dictionary<int, Department> DeptList = new Dictionary<int, Department>();
+       public static Dictionary<int, Department> DeptList = new Dictionary<int, Department>();
 
         public static void LoadDept()
         {
+            #region Load Dept
             FileStream fs = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment4\Assignment4\dept.csv",
-                FileMode.Open, FileAccess.Read);
-            
+                    FileMode.Open, FileAccess.Read);
+
             StreamReader reader = new StreamReader(fs);
             string deptstring;
             while ((deptstring = reader.ReadLine()) != null)
@@ -27,18 +28,20 @@ namespace Assignment4
                 dept.Location = deptDetails[2];
 
                 DeptList.Add(dept.DeptNo, dept);
-                
+
             }
 
             fs.Close();
-            reader=null;
-            
+            reader = null; 
+            #endregion
+
         }
         public static void LoadEmp()
         {
-            
+
+            #region Load Emp
             FileStream fs = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment4\Assignment4\emp.csv",
-                FileMode.Open, FileAccess.Read);
+                    FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(fs);
             string empstring = null;
 
@@ -51,15 +54,17 @@ namespace Assignment4
                 emp.Designation = empDetails[2];
                 emp.Salary = double.Parse(empDetails[3]);
                 emp.Commission = double.Parse(empDetails[4]);
-                int dept = int.Parse(empDetails[5]);
-                DeptList[dept].employees.Add(emp);
+                int deptno = int.Parse(empDetails[5]);
+                DeptList[deptno].employees.Add(emp);
             }
-            
+
             reader = null;
-            fs.Close();
+            fs.Close(); 
+            #endregion
         }
         public static double Calcluate_Total_Salary()
         {
+            #region Calcluate_Total_Salary
             double totalSalary = 0.0f;
             foreach (int key in DeptList.Keys)
             {
@@ -70,15 +75,68 @@ namespace Assignment4
                 }
             }
 
-            return totalSalary;
+            return totalSalary; 
+            #endregion
         }
 
         public static List<Employee> GetAllEmployeesByDept(int number)
         {
                 return DeptList[number].employees;
         }
+
+        public static Dictionary<int ,int >  DeptwiseStaffCount (Dictionary<int,Department> DeptList)
+        {
+            #region DeptwiseStaffCount
+            Dictionary<int, int> staffCount = new Dictionary<int, int>();
+            foreach (int key in DeptList.Keys)
+            {
+                staffCount[key] = DeptList[key].employees.Count;
+            }
+            return staffCount; 
+            #endregion
+        }
+
+        public static Dictionary<int, Double> DeptwiseAvgSal(Dictionary<int , Department>  DeptList)
+        {
+            #region DeptwiseAvgSal
+            Dictionary<int, double> AvgSal = new Dictionary<int, double>();
+
+            foreach (int key in DeptList.Keys)
+            {
+                List<Employee> emp = DeptList[key].employees;
+                double avgsal = 0.0;
+                foreach (Employee e in emp)
+                {
+                    avgsal += e.Salary;
+                }
+                AvgSal[key] = avgsal / DeptList[key].employees.Count;
+            }
+            return AvgSal; 
+            #endregion
+
+        }
+        public static Dictionary<int, Double> DeptwiseMinSal(Dictionary<int , Department> DeptList)
+        {
+            #region DeptwiseMinSal
+            Dictionary<int, double> minSal = new Dictionary<int, double>();
+            foreach (int key in DeptList.Keys)
+            {
+                List<Employee> emp = DeptList[key].employees;
+                double minsal = Int32.MaxValue;
+                foreach (Employee e in emp)
+                {
+                    if (e.Salary < minsal)
+                        minsal = e.Salary;
+                }
+                minSal[key] = minsal;
+            }
+            return minSal; 
+            #endregion
+        }
         public static int menulist()
         {
+            #region MenuList
+
             int choice;
             Console.WriteLine("0. EXIT");
             Console.WriteLine("1. Calcluate_Total_Salary");
@@ -88,14 +146,17 @@ namespace Assignment4
             Console.WriteLine("5. DeptwiseMinSal");
             Console.WriteLine("Enter choice : ");
             choice = Convert.ToInt32(Console.ReadLine());
-            return choice;
+            return choice; 
+            #endregion
         }
         static void Main(string[] args)
         {
+            #region Main Method
+
             LoadDept();
             LoadEmp();
             int choice;
-            while ((choice=menulist())!=0)
+            while ((choice = menulist()) != 0)
             {
                 switch (choice)
                 {
@@ -113,10 +174,28 @@ namespace Assignment4
                         }
                         break;
                     case 3:
+
+                        Dictionary<int, int> dict = DeptwiseStaffCount(DeptList);
+                        foreach (int key in dict.Keys)
+                        {
+                            Console.WriteLine("the staff in the DeptNo is with Dept count" + key + "is" + dict[key]);
+                        }
                         break;
+
                     case 4:
+
+                        Dictionary<int, Double> avgsal = DeptwiseAvgSal(DeptList);
+                        foreach (int count in avgsal.Keys)
+                        {
+                            Console.WriteLine("the avg salary of deptNo with dept salary" + count + " is " + avgsal[count]);
+                        }
                         break;
                     case 5:
+                        Dictionary<int, Double> minsal = DeptwiseMinSal(DeptList);
+                        foreach (int key in minsal.Keys)
+                        {
+                            Console.WriteLine("the min salary of deptNo with min salary" + key + " is" + minsal[key]);
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid Choice!");
@@ -130,7 +209,8 @@ namespace Assignment4
                 }
 
             }
-        
+
+            #endregion
         }
 
 
