@@ -37,7 +37,7 @@ namespace Assignment4
             fs = null;
         }
 
-        /*public static void LoadEmp() 
+        public static void LoadEmp() 
         { 
         FileStream fs = new FileStream(@"D:\KDAC_Online_COurse\msnet_vivek_36441\assignment\Assignment4\Assignment4\emp.csv", FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(fs);
@@ -57,7 +57,7 @@ namespace Assignment4
                 emp.Commission = Convert.ToDouble(Details[4]);
                 emp.DeptNo = int.Parse(Details[5]);
                 DeptList[emp.DeptNo].employees.Add(emp);
-            }*/
+            }
         }
 
 
