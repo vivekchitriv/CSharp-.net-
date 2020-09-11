@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignment4
 {
-    class Employee
+   public class Employee
     {
 
         private int _Empno;
@@ -14,13 +14,9 @@ namespace Assignment4
         private string _Designation;
         private Double _Salary;
         private Double _Commission;
-        private int _DeptNo;
+        
 
-        public int DeptNo
-        {
-            get { return _DeptNo; }
-            set { _DeptNo = value; }
-        }
+        
 
         public Double Commission
         {
@@ -28,14 +24,7 @@ namespace Assignment4
             set { _Commission = value; }
         }
 
-        private int myVar;
-
-        public int MyProperty
-        {
-            get { return myVar; }
-            set { myVar = value; }
-        }
-
+        
         public Double Salary
         {
             get { return _Salary; }
@@ -60,10 +49,28 @@ namespace Assignment4
             set { _Empno = value; }
         }
 
-        
+        public Employee()
+        {
+            _Empno = 0;
+            _Name = "";
+            _Designation = "";
+            _Salary = 0.0;
+            _Commission = 0.0;
+            
+        }
+        public Employee(int empno, string name, string designation, double salary, double commission, int deptNo)
+        {
+            _Empno = empno;
+            _Name = name;
+            _Designation = designation;
+            _Salary = salary;
+            _Commission = commission;
+            
+        }
+
         public override string ToString()
         {
-            return this._Empno+","+this.Name+","+this._Designation+","+this.Salary+","+this.Commission + ","+this._DeptNo;
+            return this._Empno+","+this.Name+","+this._Designation+","+this.Salary+","+this.Commission ;
         }
     }
 }

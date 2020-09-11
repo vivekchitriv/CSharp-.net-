@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Assignment4
 {
-    class Department
+   public class Department
     {
         private int _DeptNo;
         private string _DeptName;
         private string _Location;
-        private List<Employee> _employees;
+        private List<Employee> _employees = new List<Employee>();
 
         public List<Employee> employees
         {
