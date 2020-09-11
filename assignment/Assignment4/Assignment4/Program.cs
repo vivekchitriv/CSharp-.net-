@@ -127,8 +127,10 @@ namespace Assignment4
                 {
                     if (e.Salary < minsal)
                         minsal = e.Salary;
+
+                    minSal[key] = minsal;
                 }
-                minSal[key] = minsal;
+                
             }
             return minSal; 
             #endregion
