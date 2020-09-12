@@ -29,6 +29,11 @@ namespace Assignment4
 
                 DeptList.Add(dept.DeptNo, dept);
 
+                /*foreach (int key in DeptList.Keys)
+                {
+                    Console.WriteLine("nameProperty: {0}; value: {1}", key, DeptList[key]);
+                }*/
+
             }
 
             fs.Close();
@@ -56,8 +61,19 @@ namespace Assignment4
                 emp.Commission = double.Parse(empDetails[4]);
                 int deptno = int.Parse(empDetails[5]);
                 DeptList[deptno].employees.Add(emp);
+
+                foreach (int key in DeptList.Keys)
+                {
+                    int number = 10;
+                    foreach (List<Employee> Emp in )
+                    {
+                        Console.WriteLine("nameProperty: {0}; value: {1}", key, DeptList[key].employees);
+                    }   
+                    
+                }
             }
 
+            
             reader = null;
             fs.Close(); 
             #endregion
